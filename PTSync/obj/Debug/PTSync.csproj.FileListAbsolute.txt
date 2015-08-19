@@ -1,0 +1,18 @@
+C:\Users\Purvi\AppData\Local\Temporary Projects\PTSync\bin\Debug\PTSync.exe
+C:\Users\Purvi\AppData\Local\Temporary Projects\PTSync\bin\Debug\PTSync.pdb
+C:\Users\Purvi\AppData\Local\Temporary Projects\PTSync\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Purvi\AppData\Local\Temporary Projects\PTSync\obj\Debug\PTSync.Properties.Resources.resources
+C:\Users\Purvi\AppData\Local\Temporary Projects\PTSync\obj\Debug\PTSync.csproj.GenerateResource.Cache
+C:\Users\Purvi\AppData\Local\Temporary Projects\PTSync\obj\Debug\PTSync.exe
+C:\Users\Purvi\AppData\Local\Temporary Projects\PTSync\obj\Debug\PTSync.pdb
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\bin\Debug\PTSync.exe
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\bin\Debug\PTSync.pdb
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\obj\Debug\PTSync.Properties.Resources.resources
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\obj\Debug\PTSync.SyncForm.resources
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\obj\Debug\PTSync.csproj.GenerateResource.Cache
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\obj\Debug\PTSync.exe
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\obj\Debug\PTSync.pdb
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\bin\Debug\Newtonsoft.Json.Compact.dll
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\bin\Debug\Newtonsoft.Json.Compact.pdb
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSync\PTSync\bin\Debug\Newtonsoft.Json.Compact.xml

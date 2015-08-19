@@ -1,0 +1,13 @@
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\obj\Release\PTSyncClient.ConnectionForm.resources
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\obj\Release\PTSyncClient.Properties.Resources.resources
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\obj\Release\PTSyncClient.SyncForm.resources
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\obj\Release\PTSyncClient.SyncStatusForm.resources
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\obj\Release\PTSyncClient.csproj.GenerateResource.Cache
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\bin\Release\PTSyncClient.exe
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\bin\Release\PTSyncClient.pdb
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\bin\Release\Newtonsoft.Json.Compact.dll
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\bin\Release\Newtonsoft.Json.Compact.pdb
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\bin\Release\Newtonsoft.Json.Compact.xml
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\obj\Release\PTSyncClient.exe
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncClient\obj\Release\PTSyncClient.pdb

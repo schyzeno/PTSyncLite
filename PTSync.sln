@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTSync", "PTSync\PTSync.csproj", "{D5ED24EE-CC6F-449F-9830-31D1A7F68011}"
+EndProject
+Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "PTSyncAll", "PTSyncAll\PTSyncAll.vddproj", "{C80AFEBF-8BE0-4A0D-B0F3-AB29D95D92B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTSyncClient", "PTSyncClient\PTSyncClient.csproj", "{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5ED24EE-CC6F-449F-9830-31D1A7F68011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5ED24EE-CC6F-449F-9830-31D1A7F68011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5ED24EE-CC6F-449F-9830-31D1A7F68011}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D5ED24EE-CC6F-449F-9830-31D1A7F68011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5ED24EE-CC6F-449F-9830-31D1A7F68011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5ED24EE-CC6F-449F-9830-31D1A7F68011}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C80AFEBF-8BE0-4A0D-B0F3-AB29D95D92B4}.Debug|Any CPU.ActiveCfg = Debug
+		{C80AFEBF-8BE0-4A0D-B0F3-AB29D95D92B4}.Release|Any CPU.ActiveCfg = Release
+		{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
