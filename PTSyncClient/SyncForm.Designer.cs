@@ -38,11 +38,10 @@
             this.ButtonUpdates = new System.Windows.Forms.Button();
             this.ButtonConfirmation = new System.Windows.Forms.Button();
             this.ButtonConnection = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.SyncTimer = new System.Windows.Forms.Timer();
-            this.ButtonUpMisc = new System.Windows.Forms.Button();
             this.ButtonDLSubs = new System.Windows.Forms.Button();
             this.ButtonDLMisc = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -53,6 +52,10 @@
             // 
             this.menuItem1.MenuItems.Add(this.menuItem2);
             this.menuItem1.Text = "Menu";
+            // 
+            // menuItem2
+            // 
+            this.menuItem2.Text = "";
             // 
             // ButtonSync
             // 
@@ -78,7 +81,7 @@
             this.UploadButton.Name = "UploadButton";
             this.UploadButton.Size = new System.Drawing.Size(139, 47);
             this.UploadButton.TabIndex = 2;
-            this.UploadButton.Text = "Upload Orders";
+            this.UploadButton.Text = "Upload";
             this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
             // ButtonUpdates
@@ -108,42 +111,34 @@
             this.ButtonConnection.Text = "Connection";
             this.ButtonConnection.Click += new System.EventHandler(this.ButtonConnection_Click);
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(145, 1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 170);
-            // 
             // SyncTimer
             // 
             this.SyncTimer.Tick += new System.EventHandler(this.SyncTimer_Tick);
             // 
-            // ButtonUpMisc
-            // 
-            this.ButtonUpMisc.Location = new System.Drawing.Point(0, 54);
-            this.ButtonUpMisc.Name = "ButtonUpMisc";
-            this.ButtonUpMisc.Size = new System.Drawing.Size(72, 20);
-            this.ButtonUpMisc.TabIndex = 6;
-            this.ButtonUpMisc.Text = "UP Misc";
-            this.ButtonUpMisc.Click += new System.EventHandler(this.ButtonUpMisc_Click);
-            // 
             // ButtonDLSubs
             // 
-            this.ButtonDLSubs.Location = new System.Drawing.Point(0, 80);
+            this.ButtonDLSubs.Location = new System.Drawing.Point(0, 55);
             this.ButtonDLSubs.Name = "ButtonDLSubs";
-            this.ButtonDLSubs.Size = new System.Drawing.Size(72, 20);
+            this.ButtonDLSubs.Size = new System.Drawing.Size(139, 20);
             this.ButtonDLSubs.TabIndex = 7;
-            this.ButtonDLSubs.Text = "DLsubs";
+            this.ButtonDLSubs.Text = "DL subscriptions";
             this.ButtonDLSubs.Click += new System.EventHandler(this.ButtonDLSubs_Click);
             // 
             // ButtonDLMisc
             // 
-            this.ButtonDLMisc.Location = new System.Drawing.Point(78, 54);
+            this.ButtonDLMisc.Location = new System.Drawing.Point(0, 81);
             this.ButtonDLMisc.Name = "ButtonDLMisc";
-            this.ButtonDLMisc.Size = new System.Drawing.Size(61, 20);
+            this.ButtonDLMisc.Size = new System.Drawing.Size(139, 20);
             this.ButtonDLMisc.TabIndex = 9;
             this.ButtonDLMisc.Text = "DLmisc";
             this.ButtonDLMisc.Click += new System.EventHandler(this.ButtonDLMisc_Click);
+            // 
+            // listBox1
+            // 
+            this.listBox1.Location = new System.Drawing.Point(140, 0);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(100, 184);
+            this.listBox1.TabIndex = 11;
             // 
             // SyncForm
             // 
@@ -151,10 +146,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 268);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.ButtonDLMisc);
             this.Controls.Add(this.ButtonDLSubs);
-            this.Controls.Add(this.ButtonUpMisc);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.ButtonConnection);
             this.Controls.Add(this.ButtonConfirmation);
             this.Controls.Add(this.ButtonUpdates);
@@ -178,13 +172,12 @@
         private System.Windows.Forms.Button ButtonUpdates;
         private System.Windows.Forms.Button ButtonConfirmation;
         private System.Windows.Forms.Button ButtonConnection;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuItem2;
         private System.Windows.Forms.Timer SyncTimer;
-        private System.Windows.Forms.Button ButtonUpMisc;
         private System.Windows.Forms.Button ButtonDLSubs;
         private System.Windows.Forms.Button ButtonDLMisc;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

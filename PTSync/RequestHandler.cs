@@ -52,8 +52,8 @@ namespace PTSync
                     return;
                 }
 
-                string lineBuffer="";
-                string fileName="";
+                string lineBuffer = "";
+                string fileName = "";
                 for (int i = 0; i < numberOfFiles; i++)
                 {
                     streamBuffer.Clear();
@@ -64,9 +64,9 @@ namespace PTSync
                         lineBuffer = streamReader.ReadLine();
                     fileName = lineBuffer;
                     lineBuffer = streamReader.ReadLine();
-                    while(!lineBuffer.Equals("[END]"))
-                    { 
-                        if(lineBuffer.Equals("NO_FILE_FOUND"))
+                    while (!lineBuffer.Equals("[END]"))
+                    {
+                        if (lineBuffer.Equals("NO_FILE_FOUND"))
                             break;
                         streamBuffer.Add(lineBuffer);
                         lineBuffer = streamReader.ReadLine();
@@ -89,12 +89,12 @@ namespace PTSync
                         }
                     }
                 }
-                    
+
 
                 responseStream.Close();
                 streamReader.Close();
                 //response.Close();
-                
+
             }
             catch (WebException wx)
             {
@@ -160,7 +160,7 @@ namespace PTSync
                     {
                         using (StreamWriter sw = new StreamWriter(_destination, false))
                         {
-                            for(int i =0; i<streamBuffer.Count-1;i++)
+                            for (int i = 0; i < streamBuffer.Count - 1; i++)
                                 sw.WriteLine(streamBuffer[i]);
                             downloadSuccess = true;
                         }
@@ -226,10 +226,10 @@ namespace PTSync
             {
                 string debug = e.Message;
             }
-            
+
         }
 
-        public static void HttpUploadFile(string url, string fileDir, string fileName, string paramName, string contentType,bool backup)
+        public static void HttpUploadFile(string url, string fileDir, string fileName, string paramName, string contentType, bool backup)
         {
             string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
             byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
@@ -238,7 +238,9 @@ namespace PTSync
             byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
             byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
             string filePath = Path.Combine(fileDir, fileName);
-            string _completeFilePathStage = Path.Combine(BACKUP_DIR, DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName);
+            string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(filePath)
+                                                        + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                        + Path.GetExtension(filePath));
             FileInfo fileInfo = new FileInfo(filePath);
             long totalRequestBodySize = boundarybytes.Length + headerbytes.Length + trailer.Length + fileInfo.Length;
 
@@ -246,24 +248,24 @@ namespace PTSync
             webRequest.AllowWriteStreamBuffering = false;
             webRequest.ContentType = "multipart/form-data; boundary=" + boundary;
             webRequest.Method = "POST";
-            webRequest.KeepAlive = false;                    
-           
+            webRequest.KeepAlive = false;
+
             //webRequest.Credentials = System.Net.CredentialCache.DefaultCredentials;
             //webRequest.SendChunked = true;
             webRequest.ContentLength = totalRequestBodySize;
-            
-                WebResponse wresp = null;
+
+            WebResponse wresp = null;
             try
-                {
-                   
-            using (Stream requestStream = webRequest.GetRequestStream())
             {
-                requestStream.Write(boundarybytes, 0, boundarybytes.Length);
-                requestStream.Write(headerbytes, 0, headerbytes.Length);
+
+                using (Stream requestStream = webRequest.GetRequestStream())
+                {
+                    requestStream.Write(boundarybytes, 0, boundarybytes.Length);
+                    requestStream.Write(headerbytes, 0, headerbytes.Length);
 
 
-                int loopCount = 0;
-                 FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                    int loopCount = 0;
+                    FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
                     byte[] buffer = new byte[4096];
                     int bytesRead = 0;
@@ -282,7 +284,7 @@ namespace PTSync
                     StreamReader reader2 = new StreamReader(stream2);
                     string response2 = reader2.ReadToEnd();
                     JObject jsonReponse = JObject.Parse(response2);
-                    
+
                     string successResponse = jsonReponse["Response"].ToString();
                     if (successResponse.Equals("\"success\""))
                     {
@@ -294,31 +296,31 @@ namespace PTSync
                         if (System.IO.File.Exists(filePath))
                             System.IO.File.Delete(filePath);
                     }
+                }
             }
-                }
-                catch (Exception ex)
+            catch (Exception ex)
+            {
+                string mess = ex.Message;
+                if (wresp != null)
                 {
-                    string mess = ex.Message;
-                    if (wresp != null)
-                    {
-                        wresp.Close();
-                        wresp = null;
-                    }
+                    wresp.Close();
+                    wresp = null;
                 }
-                finally
-                {
-                    webRequest = null;
-                }
-            
+            }
+            finally
+            {
+                webRequest = null;
+            }
+
         }
 
-        public static void HttpUploadDirectory(string url, string fileDir, List<string> fileNames,bool backup)
+        public static void HttpUploadDirectory(string url, string fileDir, List<string> fileNames, bool backup)
         {
             string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
             byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
             byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
             string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
-            
+
             long totalHeaderLength = 0;
             long totalBoundaryLength = 0;
             long totalFileLength = 0;
@@ -332,8 +334,8 @@ namespace PTSync
                 totalFileLength += new FileInfo(Path.Combine(fileDir, fileName)).Length;
             }
             long totalRequestBodySize = totalBoundaryLength + totalHeaderLength + trailer.Length + totalFileLength;
-                        
-            
+
+
 
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
             webRequest.AllowWriteStreamBuffering = false;
@@ -341,79 +343,81 @@ namespace PTSync
             webRequest.Method = "POST";
             webRequest.KeepAlive = false;
             webRequest.ContentLength = totalRequestBodySize;
-            
-                    WebResponse webResponse = null;
-            
-                    byte[] buffer = new byte[4096];
+
+            WebResponse webResponse = null;
+
+            byte[] buffer = new byte[4096];
             try
             {
                 using (Stream requestStream = webRequest.GetRequestStream())
                 {
-                    
+
+                    foreach (string fileName in fileNames)
+                    {
+                        string contentType = Util.MimeTypeMap.GetMimeType(Path.GetExtension(Path.Combine(fileDir, fileName)));
+                        string header = string.Format(headerTemplate, fileName, fileName, contentType);
+                        byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+                        requestStream.Write(boundarybytes, 0, boundarybytes.Length);
+                        requestStream.Write(headerbytes, 0, headerbytes.Length);
+
+                        FileStream fileStream = new FileStream(Path.Combine(fileDir, fileName), FileMode.Open, FileAccess.Read);
+                        int bytesRead = 0;
+                        while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+                        {
+                            requestStream.Write(buffer, 0, bytesRead);
+                        }
+                        fileStream.Close();
+                    }
+
+                    requestStream.Write(trailer, 0, trailer.Length);
+                    requestStream.Close();
+
+                    webResponse = webRequest.GetResponse();
+                    Stream responseStream = webResponse.GetResponseStream();
+                    StreamReader reader2 = new StreamReader(responseStream);
+                    string response2 = reader2.ReadToEnd();
+                    JObject jsonReponse = JObject.Parse(response2);
+
+                    string successResponse = jsonReponse["success"].ToString();
+                    if (successResponse.Equals("true"))
+                    {
+                        string filePath = "";
                         foreach (string fileName in fileNames)
                         {
-                            string contentType = Util.MimeTypeMap.GetMimeType(Path.GetExtension(Path.Combine(fileDir, fileName)));
-                            string header = string.Format(headerTemplate, fileName, fileName, contentType);
-                            byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
-                            requestStream.Write(boundarybytes, 0, boundarybytes.Length);
-                            requestStream.Write(headerbytes, 0, headerbytes.Length);
-
-                            FileStream fileStream = new FileStream(Path.Combine(fileDir, fileName), FileMode.Open, FileAccess.Read);
-                            int bytesRead = 0;
-                            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+                            filePath = Path.Combine(fileDir, fileName);
+                            string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(filePath)
+                                                        + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                        + Path.GetExtension(filePath));
+                            if (!System.IO.File.Exists(filePath) && backup)
                             {
-                                requestStream.Write(buffer, 0, bytesRead);
+                                //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
+                                System.IO.File.Move(filePath, _completeFilePathStage);
                             }
-                            fileStream.Close();
-                        }
-
-                        requestStream.Write(trailer, 0, trailer.Length);
-                        requestStream.Close();
-
-                        webResponse = webRequest.GetResponse();
-                        Stream responseStream = webResponse.GetResponseStream();
-                        StreamReader reader2 = new StreamReader(responseStream);
-                        string response2 = reader2.ReadToEnd();
-                        JObject jsonReponse = JObject.Parse(response2);
-
-                        string successResponse = jsonReponse["success"].ToString();
-                        if (successResponse.Equals("true"))
-                        {
-                            string filePath = "";
-                            foreach (string fileName in fileNames)
-                            {
-                                string _completeFilePathStage = Path.Combine(BACKUP_DIR, DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName);
-                                filePath = Path.Combine(fileDir, fileName);
-                                if (!System.IO.File.Exists(filePath) && backup)
-                                {
-                                    //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
-                                    System.IO.File.Move(filePath, _completeFilePathStage);
-                                }
-                                if (System.IO.File.Exists(filePath))
-                                    System.IO.File.Delete(filePath);
-                            }
+                            if (System.IO.File.Exists(filePath))
+                                System.IO.File.Delete(filePath);
                         }
                     }
                 }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                string mess = ex.Message;
+                if (webResponse != null)
                 {
-                    string mess = ex.Message;
-                    if (webResponse != null)
-                    {
-                        webResponse.Close();
-                        webResponse = null;
-                    }
+                    webResponse.Close();
+                    webResponse = null;
                 }
-                finally
-                {
-                    webRequest = null;
-                }
-            
+            }
+            finally
+            {
+                webRequest = null;
+            }
+
         }
 
         public static void Download(String url, Subscription package)
         {
-            string destinationPath = Path.Combine(package.Destination,package.FileName);
+            string destinationPath = Path.Combine(package.Destination, package.FileName);
             Stream responseStream = null;
             MemoryStream memoryStream = null;
             try
@@ -478,10 +482,10 @@ namespace PTSync
             }
         }
 
-        public static void startUploadOHH(string url, Subscription package,bool backup)
+        public static void startUploadOHH(string url, Subscription package, bool backup)
         {
             string _completeFilePathSource;
-        
+
 
             string[] filePaths = Directory.GetFiles(package.Source, package.FileName);
             if (filePaths.Length > 0)
@@ -490,7 +494,9 @@ namespace PTSync
             {
                 return;
             }
-            string _completeFilePathStage = Path.Combine(BACKUP_DIR, DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + package.FileName);
+            string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(_completeFilePathSource)
+                                                        + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                        + Path.GetExtension(_completeFilePathSource));
             try
             {
                 List<String> fileBuffer = new List<String>();

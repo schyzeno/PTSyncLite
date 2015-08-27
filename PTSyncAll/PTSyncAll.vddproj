@@ -305,8 +305,8 @@
         "OutputFilename" = "8:Release\\PTSyncAll.cab"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
-        "SignOutput" = "11:FALSE"
-        "CertificateHash" = "8:"
+        "SignOutput" = "11:TRUE"
+        "CertificateHash" = "8:D8AD485F266A5144FE8D3A0E129E9AF1A52A2E45"
         "TimeStampServer" = "8:"
         }
     }

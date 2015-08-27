@@ -14,6 +14,7 @@ namespace PTSyncClient
         private static int MINIMUM_INTERVAL = 600000;
         private static string DEFAULT_COMPLETE_STATEMENT = "Complete!\n";
         SyncController syncController;
+        List<string> subscriptions = new List<string>();
         class SyncOperation{
             public Action SyncAction{get;set;}
             public string BeginText { get; set; }
@@ -48,18 +49,20 @@ namespace PTSyncClient
 
         private void ButtonSync_Click(object sender, EventArgs e)
         {
-            List<SyncOperation> ops = new List<SyncOperation>();
-            ops.Add(new SyncOperation(syncController.DownloadSubscriptions, "Downloading Subs...", DEFAULT_COMPLETE_STATEMENT));
-            ops.Add(new SyncOperation(syncController.loadSubscriptions, "Loading Subs...", DEFAULT_COMPLETE_STATEMENT));
-            ops.Add(new SyncOperation(syncController.UploadOHH, "Uploading Orders...", DEFAULT_COMPLETE_STATEMENT));
-            ops.Add(new SyncOperation(syncController.DownloadUpdates, "Downloading Updates...", DEFAULT_COMPLETE_STATEMENT));
-            ops.Add(new SyncOperation(syncController.DownloadConfirmations, "Downloading Confirmations...", DEFAULT_COMPLETE_STATEMENT));
-            ops.Add(new SyncOperation(syncController.DeleteFiles, "Deleting Files...", DEFAULT_COMPLETE_STATEMENT));
-            ops.Add(new SyncOperation(syncController.RenameFiles, "Renaming Files...", DEFAULT_COMPLETE_STATEMENT));
-            ops.Add(new SyncOperation(syncController.Download, "Downloading Misc...", DEFAULT_COMPLETE_STATEMENT));
-            ops.Add(new SyncOperation(syncController.UploadMisc, "Uploading Misc...", DEFAULT_COMPLETE_STATEMENT));
-            ops.Add(new SyncOperation(syncController.UploadStartsWith, "Uploading Startswith...", DEFAULT_COMPLETE_STATEMENT));
-            ActionWithStatus(ops);
+            List<SyncOperation> operations = new List<SyncOperation>();
+            operations.Add(new SyncOperation(syncController.DownloadSubscriptions, "Downloading Subs...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(syncController.loadSubscriptions, "Loading Subs...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(syncController.UploadOHH, "Uploading Orders...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(syncController.DownloadUpdates, "Downloading Updates...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(syncController.DownloadConfirmations, "Downloading Confirmations...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(syncController.DeleteFiles, "Deleting Files...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(syncController.DeleteStartsWith, "Del Files Starts W/...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(syncController.RenameFiles, "Renaming Files...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(syncController.Download, "Downloading Misc...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(syncController.UploadMisc, "Uploading Misc...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(syncController.UploadStartsWith, "Uploading Startswith...", DEFAULT_COMPLETE_STATEMENT));
+            ActionWithStatus(operations);
+            RefreshSubscriptionList();
         }
 
 
@@ -69,6 +72,7 @@ namespace PTSyncClient
             ops.Add(new SyncOperation(syncController.DownloadSubscriptions, "Downloading Subs...", DEFAULT_COMPLETE_STATEMENT));
             ops.Add(new SyncOperation(syncController.loadSubscriptions, "Loading Subs...", DEFAULT_COMPLETE_STATEMENT));
             ActionWithStatus(ops);
+            RefreshSubscriptionList();
         }
 
         private void UploadButton_Click(object sender, EventArgs e)
@@ -78,7 +82,11 @@ namespace PTSyncClient
 
         private void ButtonUpdates_Click(object sender, EventArgs e)
         {
-            ActionWithStatus(new SyncOperation(syncController.DownloadUpdates, "Downloading Updates...", DEFAULT_COMPLETE_STATEMENT));
+            List<SyncOperation> ops = new List<SyncOperation>();
+            ops.Add(new SyncOperation(syncController.UploadOHH, "Uploading Orders...", DEFAULT_COMPLETE_STATEMENT));
+            ops.Add(new SyncOperation(syncController.UploadMisc, "Uploading Misc...", DEFAULT_COMPLETE_STATEMENT));
+            ops.Add(new SyncOperation(syncController.UploadStartsWith, "Uploading Startswith...", DEFAULT_COMPLETE_STATEMENT));
+            ActionWithStatus(ops);
         }
 
 
@@ -116,12 +124,18 @@ namespace PTSyncClient
                             syncController.User.Password + " \n" +
                             syncController.Settings.IP + " \n" +
                             syncController.Settings.Port);
-            StringBuilder sb = new StringBuilder();
+            RefreshSubscriptionList();
+        }
+
+        private void RefreshSubscriptionList()
+        {
+            subscriptions.Clear();
             foreach (Models.Subscription subscription in syncController.Subscriptions)
             {
-                sb.Append(subscription.Name + "\n");
+                subscriptions.Add(subscription.Name);
             }
-            label1.Text = sb.ToString();
+            listBox1.DataSource = null;
+            listBox1.DataSource = subscriptions;
         }
 
 

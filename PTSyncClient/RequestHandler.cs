@@ -238,7 +238,9 @@ namespace PTSyncClient
             byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
             byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
             string filePath = Path.Combine(fileDir, fileName);
-            string _completeFilePathStage = Path.Combine(BACKUP_DIR, DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName);
+            string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(filePath)
+                                                        + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                        + Path.GetExtension(filePath));
             FileInfo fileInfo = new FileInfo(filePath);
             long totalRequestBodySize = boundarybytes.Length + headerbytes.Length + trailer.Length + fileInfo.Length;
 
@@ -382,8 +384,10 @@ namespace PTSyncClient
                         string filePath = "";
                         foreach (string fileName in fileNames)
                         {
-                            string _completeFilePathStage = Path.Combine(BACKUP_DIR, DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName);
                             filePath = Path.Combine(fileDir, fileName);
+                            string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(filePath)
+                                                        + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                        + Path.GetExtension(filePath));                            
                             if (!System.IO.File.Exists(filePath) && backup)
                             {
                                 //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
@@ -490,7 +494,9 @@ namespace PTSyncClient
             {
                 return;
             }
-            string _completeFilePathStage = Path.Combine(BACKUP_DIR, DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + package.FileName);
+            string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(_completeFilePathSource)
+                                                        +"_"+DateTime.Now.ToString("yyyyMMddHHmmss") 
+                                                        + Path.GetExtension(_completeFilePathSource));
             try
             {
                 List<String> fileBuffer = new List<String>();

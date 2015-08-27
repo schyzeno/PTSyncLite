@@ -197,5 +197,21 @@ namespace PTSyncClient
             }
         }
 
+        public void DeleteStartsWith()
+        {
+            foreach (Subscription subscription in Subscriptions)
+            {
+                if (subscription.Type.Equals("DeleteStartsWith"))
+                {
+                    string fileNameRegEx = subscription.FileName + "*";
+                    foreach (string filePath in Directory.GetFiles(subscription.Source, fileNameRegEx))
+                    {
+                        if (File.Exists(filePath))
+                            File.Delete(filePath);
+                    }
+                }
+            }
+        }
+
     }
 }
