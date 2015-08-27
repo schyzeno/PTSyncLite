@@ -14,8 +14,8 @@ namespace PTSync
         public User User { get; set; }
         public Settings Settings { get; set; }
         public List<Subscription> Subscriptions { get; set; }
-        private const string waitFilePath=@"\HHUpdate\Wait.Txt";
-        private const string readyFilePath=@"\HHUpdate\Ready.Txt";
+        private const string waitFilePath = @"\HHUpdate\Wait.Txt";
+        private const string readyFilePath = @"\HHUpdate\Ready.Txt";
 
         public SyncController()
         {
@@ -47,27 +47,27 @@ namespace PTSync
 
         public void DownloadUpdates()
         {
-            if(File.Exists(waitFilePath))
+            if (File.Exists(waitFilePath))
             {
                 return;
             }
             //Delete All Files
 
-            Dictionary<String,bool> updateCheckList = new Dictionary<string,bool>();
+            Dictionary<String, bool> updateCheckList = new Dictionary<string, bool>();
             //Loop through subs for HHDownload set, download
-            foreach(Subscription subscription in Subscriptions)
+            foreach (Subscription subscription in Subscriptions)
             {
-                if(subscription.Type.Equals("DownloadSet"))
+                if (subscription.Type.Equals("DownloadSet"))
                 {
-                    if(File.Exists(Path.Combine(subscription.Destination,subscription.FileName)))
+                    if (File.Exists(Path.Combine(subscription.Destination, subscription.FileName)))
                         File.Delete(Path.Combine(subscription.Destination, subscription.FileName));
                     bool fileDownloaded = RequestHandler.StartDownloadSetRequest(
-                        ServiceAddress.GetDownloadUpdateURL(Settings,User,subscription)
-                        ,subscription);
-                    updateCheckList.Add(subscription.Name,fileDownloaded);
+                        ServiceAddress.GetDownloadUpdateURL(Settings, User, subscription)
+                        , subscription);
+                    updateCheckList.Add(subscription.Name, fileDownloaded);
                 }
             }
-            
+
         }
 
         public void UploadOHH()
@@ -76,7 +76,7 @@ namespace PTSync
             {
                 if (subscription.Type.Equals("Upload"))
                 {
-                    RequestHandler.startUploadOHH(ServiceAddress.GetUploadURL(Settings, User, subscription), subscription,Settings.BackupData);
+                    RequestHandler.startUploadOHH(ServiceAddress.GetUploadURL(Settings, User, subscription), subscription, Settings.BackupData);
                 }
             }
         }
@@ -94,12 +94,12 @@ namespace PTSync
 
         public void DownloadSubscriptions()
         {
-            RequestHandler.DownloadSubscriptions(ServiceAddress.GetSubscriptionURL(Settings,User));
+            RequestHandler.DownloadSubscriptions(ServiceAddress.GetSubscriptionURL(Settings, User));
         }
 
         public void ConfirmDownloads()
         {
-            
+
         }
 
         public void DeleteFiles()
@@ -122,7 +122,7 @@ namespace PTSync
                 if (subscription.Type.Equals("Rename"))
                 {
                     string sourcePath = Path.Combine(subscription.Source, subscription.FileName);
-                    string destinationPath = Path.Combine(subscription.Destination,subscription.Stage);
+                    string destinationPath = Path.Combine(subscription.Destination, subscription.Stage);
                     if (File.Exists(sourcePath))
                     {
                         if (File.Exists(destinationPath))
@@ -140,7 +140,7 @@ namespace PTSync
                 if (subscription.Type.Equals("UploadMisc"))
                 {
                     string url = ServiceAddress.GetUploadMiscURL(Settings, User, subscription);
-                    string path = Path.Combine(subscription.Source,subscription.FileName);
+                    string path = Path.Combine(subscription.Source, subscription.FileName);
                     string mime = Util.MimeTypeMap.GetMimeType(Path.GetExtension(path));
                     if (File.Exists(path))
                     {
@@ -167,7 +167,7 @@ namespace PTSync
                     string fileNameRegEx = subscription.FileName + "*";
 
                     List<string> fileNames = new List<string>();
-                    foreach(string filePath in Directory.GetFiles(subscription.Source, fileNameRegEx))
+                    foreach (string filePath in Directory.GetFiles(subscription.Source, fileNameRegEx))
                         fileNames.Add(Path.GetFileName(filePath));
 
                     string url = ServiceAddress.GetUploadStartsWithURL(Settings, User, subscription);
@@ -177,7 +177,7 @@ namespace PTSync
                                 , fileNames
                                 , Settings.BackupData
                             );
-                                        
+
                 }
             }
         }
@@ -192,6 +192,22 @@ namespace PTSync
                     {
                         string url = ServiceAddress.GetDownloadURL(Settings, User, subscription);
                         RequestHandler.Download(url, subscription);
+                    }
+                }
+            }
+        }
+
+        public void DeleteStartsWith()
+        {
+            foreach (Subscription subscription in Subscriptions)
+            {
+                if (subscription.Type.Equals("DeleteStartsWith"))
+                {
+                    string fileNameRegEx = subscription.FileName + "*";
+                    foreach (string filePath in Directory.GetFiles(subscription.Source, fileNameRegEx))
+                    {
+                        if (File.Exists(filePath))
+                            File.Delete(filePath);
                     }
                 }
             }

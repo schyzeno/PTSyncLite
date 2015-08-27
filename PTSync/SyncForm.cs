@@ -29,6 +29,7 @@ namespace PTSync
             syncController.DownloadUpdates();
             syncController.DownloadConfirmations();
             syncController.DeleteFiles();
+            syncController.DeleteStartsWith();
             syncController.RenameFiles();
             syncController.Download();
             syncController.UploadMisc();
