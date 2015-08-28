@@ -159,26 +159,36 @@ namespace PTSync
 
         public void UploadStartsWith()
         {
-            foreach (Subscription subscription in Subscriptions)
-            {
-                if (subscription.Type.Equals("UploadStartsWith"))
+            try{
+                foreach (Subscription subscription in Subscriptions)
                 {
-                    //Find all files that
-                    string fileNameRegEx = subscription.FileName + "*";
+                    if (subscription.Type.Equals("UploadStartsWith"))
+                    {
+                        //Find all files that
+                        string fileNameRegEx = subscription.FileName + "*";
 
-                    List<string> fileNames = new List<string>();
-                    foreach (string filePath in Directory.GetFiles(subscription.Source, fileNameRegEx))
-                        fileNames.Add(Path.GetFileName(filePath));
+                        List<string> fileNames = new List<string>();
+                        foreach (string filePath in Directory.GetFiles(subscription.Source, fileNameRegEx))
+                            fileNames.Add(Path.GetFileName(filePath));
 
-                    string url = ServiceAddress.GetUploadStartsWithURL(Settings, User, subscription);
-                    RequestHandler.HttpUploadDirectory(
-                                url
-                                , subscription.Source
-                                , fileNames
-                                , Settings.BackupData
-                            );
+                        string url = ServiceAddress.GetUploadStartsWithURL(Settings, User, subscription);
+                        RequestHandler.HttpUploadDirectory(
+                                    url
+                                    , subscription.Source
+                                    , fileNames
+                                    , Settings.BackupData
+                                );
 
+                    }
                 }
+            }
+            catch (DirectoryNotFoundException dex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + dex.Message);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message);
             }
         }
 
@@ -199,17 +209,28 @@ namespace PTSync
 
         public void DeleteStartsWith()
         {
-            foreach (Subscription subscription in Subscriptions)
+            try
             {
-                if (subscription.Type.Equals("DeleteStartsWith"))
+                foreach (Subscription subscription in Subscriptions)
                 {
-                    string fileNameRegEx = subscription.FileName + "*";
-                    foreach (string filePath in Directory.GetFiles(subscription.Source, fileNameRegEx))
+                    if (subscription.Type.Equals("DeleteStartsWith"))
                     {
-                        if (File.Exists(filePath))
-                            File.Delete(filePath);
+                        string fileNameRegEx = subscription.FileName + "*";
+                        foreach (string filePath in Directory.GetFiles(subscription.Source, fileNameRegEx))
+                        {
+                            if (File.Exists(filePath))
+                                File.Delete(filePath);
+                        }
                     }
                 }
+            }
+            catch (DirectoryNotFoundException dex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + dex.Message);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message);
             }
         }
 

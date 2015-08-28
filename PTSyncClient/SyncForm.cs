@@ -77,16 +77,16 @@ namespace PTSyncClient
 
         private void UploadButton_Click(object sender, EventArgs e)
         {
-            ActionWithStatus(new SyncOperation(syncController.UploadOHH, "Uploading Orders...", DEFAULT_COMPLETE_STATEMENT));
-        }
-
-        private void ButtonUpdates_Click(object sender, EventArgs e)
-        {
             List<SyncOperation> ops = new List<SyncOperation>();
             ops.Add(new SyncOperation(syncController.UploadOHH, "Uploading Orders...", DEFAULT_COMPLETE_STATEMENT));
             ops.Add(new SyncOperation(syncController.UploadMisc, "Uploading Misc...", DEFAULT_COMPLETE_STATEMENT));
             ops.Add(new SyncOperation(syncController.UploadStartsWith, "Uploading Startswith...", DEFAULT_COMPLETE_STATEMENT));
             ActionWithStatus(ops);
+        }
+
+        private void ButtonUpdates_Click(object sender, EventArgs e)
+        {
+            ActionWithStatus(new SyncOperation(syncController.DownloadUpdates, "Downloading Updates...", DEFAULT_COMPLETE_STATEMENT));
         }
 
 

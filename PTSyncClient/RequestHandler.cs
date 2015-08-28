@@ -18,83 +18,71 @@ namespace PTSyncClient
             string _webServiceURI = url;
             string _destination;
             string _backup;
-            Stream responseStream = null;
-            StreamReader streamReader = null;
             try
             {
                 WebRequest wrGETURL = WebRequest.Create(_webServiceURI);
-
-                //HttpWebResponse response = (HttpWebResponse)_httpRequest.GetResponse();
-
-                responseStream = wrGETURL.GetResponse().GetResponseStream();
-                streamReader = new System.IO.StreamReader(responseStream);
-
                 List<String> streamBuffer = new List<String>();
                 int numberOfFiles = 0;
-                if (!streamReader.EndOfStream)
-                {
-                    string firstLine = streamReader.ReadLine();
-                    if (firstLine.ToUpper().Equals("[0]") || firstLine.ToUpper().Equals("NO_FILE_FOUND"))
-                    {
-                        responseStream.Close();
-                        streamReader.Close();
-                        return;
-                    }
-                    else
-                    {
-                        numberOfFiles = Convert.ToInt32(firstLine.Substring(1, firstLine.Length - 2));
-                    }
-                }
-                else
-                {
-                    responseStream.Close();
-                    streamReader.Close();
-                    return;
-                }
 
-                string lineBuffer = "";
-                string fileName = "";
-                for (int i = 0; i < numberOfFiles; i++)
+                using (Stream responseStream = wrGETURL.GetResponse().GetResponseStream())
+                using (StreamReader streamReader = new System.IO.StreamReader(responseStream))
                 {
-                    streamBuffer.Clear();
-                    lineBuffer = streamReader.ReadLine();
-                    if (!lineBuffer.Equals("[START]"))
-                        return;
-                    else
-                        lineBuffer = streamReader.ReadLine();
-                    fileName = lineBuffer;
-                    lineBuffer = streamReader.ReadLine();
-                    while (!lineBuffer.Equals("[END]"))
+                    if (!streamReader.EndOfStream)
                     {
+                        string firstLine = streamReader.ReadLine();
+                        if (firstLine.ToUpper().Equals("[0]") || firstLine.ToUpper().Equals("NO_FILE_FOUND"))
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            numberOfFiles = Convert.ToInt32(firstLine.Substring(1, firstLine.Length - 2));
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                    string lineBuffer = "";
+                    string fileName = "";
+                    for (int i = 0; i < numberOfFiles; i++)
+                    {
+                        streamBuffer.Clear();
+                        lineBuffer = streamReader.ReadLine();
+                        if (!lineBuffer.Equals("[START]"))
+                            return;
+                        else
+                            lineBuffer = streamReader.ReadLine();
+                        fileName = lineBuffer;
+                        lineBuffer = streamReader.ReadLine();
+                        while (!lineBuffer.Equals("[END]"))
+                        {
+                            if (lineBuffer.Equals("NO_FILE_FOUND"))
+                                break;
+                            streamBuffer.Add(lineBuffer);
+                            lineBuffer = streamReader.ReadLine();
+                        }
                         if (lineBuffer.Equals("NO_FILE_FOUND"))
-                            break;
-                        streamBuffer.Add(lineBuffer);
-                        lineBuffer = streamReader.ReadLine();
-                    }
-                    if (lineBuffer.Equals("NO_FILE_FOUND"))
-                        return;
-                    if (streamBuffer.Count > 0)
-                    {
-                        _destination = package.Destination + "\\" + fileName;
-                        using (StreamWriter sw = new StreamWriter(_destination, false))
+                            return;
+                        if (streamBuffer.Count > 0)
                         {
-                            for (int j = 0; j < streamBuffer.Count; j++)
-                                sw.WriteLine(streamBuffer[j]);
-                        }
-                        _backup = package.Stage + "\\" + fileName;
-                        using (StreamWriter sw = new StreamWriter(_backup, false))
-                        {
-                            for (int k = 0; k < streamBuffer.Count; k++)
-                                sw.WriteLine(streamBuffer[k]);
+                            _destination = package.Destination + "\\" + fileName;
+                            using (StreamWriter sw = new StreamWriter(_destination, false))
+                            {
+                                for (int j = 0; j < streamBuffer.Count; j++)
+                                    sw.WriteLine(streamBuffer[j]);
+                            }
+                            _backup = package.Stage + "\\" + fileName;
+                            using (StreamWriter sw = new StreamWriter(_backup, false))
+                            {
+                                for (int k = 0; k < streamBuffer.Count; k++)
+                                    sw.WriteLine(streamBuffer[k]);
+                            }
                         }
                     }
+
                 }
-
-
-                responseStream.Close();
-                streamReader.Close();
-                //response.Close();
-
             }
             catch (WebException wx)
             {
@@ -104,11 +92,6 @@ namespace PTSyncClient
             {
                 System.Diagnostics.Debug.WriteLine("Exception: " + wx.Message);
             }
-            finally
-            {
-                responseStream.Close();
-                streamReader.Close();
-            }
         }
 
         public static bool StartDownloadSetRequest(string url, Subscription package)
@@ -116,44 +99,35 @@ namespace PTSyncClient
             bool downloadSuccess = false;
             string _webServiceURI = url;
             string _destination = Path.Combine(package.Destination, package.FileName);
-            Stream responseStream = null;
-            StreamReader streamReader = null;
+
+
             try
             {
                 WebRequest wrGETURL = WebRequest.Create(_webServiceURI);
-
-                //HttpWebResponse response = (HttpWebResponse)_httpRequest.GetResponse();
-
-                responseStream = wrGETURL.GetResponse().GetResponseStream();
-                streamReader = new System.IO.StreamReader(responseStream);
-
                 List<String> streamBuffer = new List<String>();
-                if (!streamReader.EndOfStream)
+
+                using (Stream responseStream = wrGETURL.GetResponse().GetResponseStream())
+                using (StreamReader streamReader = new System.IO.StreamReader(responseStream))
                 {
-                    string firstLine = streamReader.ReadLine();
-                    if (!firstLine.ToUpper().Equals("[START]"))
+
+                    if (!streamReader.EndOfStream)
                     {
-                        responseStream.Close();
-                        streamReader.Close();
-                        //response.Close();
+                        string firstLine = streamReader.ReadLine();
+                        if (!firstLine.ToUpper().Equals("[START]"))
+                        {
+                            return downloadSuccess;
+                        }
+                    }
+                    else
+                    {
                         return downloadSuccess;
                     }
-                }
-                else
-                {
-                    responseStream.Close();
-                    streamReader.Close();
-                    //response.Close();
-                    return downloadSuccess;
-                }
-                while (!streamReader.EndOfStream)
-                {
-                    streamBuffer.Add(streamReader.ReadLine());
+                    while (!streamReader.EndOfStream)
+                    {
+                        streamBuffer.Add(streamReader.ReadLine());
+                    }
                 }
 
-                responseStream.Close();
-                streamReader.Close();
-                //response.Close();
                 if (streamBuffer.Count > 0)
                 {
                     if (DownloadedCompletely(streamBuffer[streamBuffer.Count - 1]))
@@ -177,14 +151,8 @@ namespace PTSyncClient
                 System.Diagnostics.Debug.WriteLine("Exception: " + wx.Message);
                 downloadSuccess = false;
             }
-            finally
-            {
-                responseStream.Close();
-                streamReader.Close();
-            }
             return downloadSuccess;
         }
-
 
         private static bool DownloadedCompletely(string lastLine)
         {
@@ -257,15 +225,12 @@ namespace PTSyncClient
             WebResponse wresp = null;
             try
             {
-
+                using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 using (Stream requestStream = webRequest.GetRequestStream())
                 {
                     requestStream.Write(boundarybytes, 0, boundarybytes.Length);
                     requestStream.Write(headerbytes, 0, headerbytes.Length);
-
-
                     int loopCount = 0;
-                    FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
                     byte[] buffer = new byte[4096];
                     int bytesRead = 0;
@@ -274,10 +239,7 @@ namespace PTSyncClient
                         requestStream.Write(buffer, 0, bytesRead);
                         loopCount++;
                     }
-                    fileStream.Close();
-
                     requestStream.Write(trailer, 0, trailer.Length);
-                    requestStream.Close();
 
                     wresp = webRequest.GetResponse();
                     Stream stream2 = wresp.GetResponseStream();
@@ -285,10 +247,10 @@ namespace PTSyncClient
                     string response2 = reader2.ReadToEnd();
                     JObject jsonReponse = JObject.Parse(response2);
 
-                    string successResponse = jsonReponse["Response"].ToString();
-                    if (successResponse.Equals("\"success\""))
+                    string successResponse = jsonReponse["success"].ToString();
+                    if (successResponse.Equals("true"))
                     {
-                        if (!System.IO.File.Exists(filePath) && backup)
+                        if (System.IO.File.Exists(filePath) && backup)
                         {
                             //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
                             System.IO.File.Move(filePath, _completeFilePathStage);
@@ -387,8 +349,8 @@ namespace PTSyncClient
                             filePath = Path.Combine(fileDir, fileName);
                             string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(filePath)
                                                         + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
-                                                        + Path.GetExtension(filePath));                            
-                            if (!System.IO.File.Exists(filePath) && backup)
+                                                        + Path.GetExtension(filePath));
+                            if (System.IO.File.Exists(filePath) && backup)
                             {
                                 //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
                                 System.IO.File.Move(filePath, _completeFilePathStage);
@@ -418,52 +380,34 @@ namespace PTSyncClient
         public static void Download(String url, Subscription package)
         {
             string destinationPath = Path.Combine(package.Destination, package.FileName);
-            Stream responseStream = null;
-            MemoryStream memoryStream = null;
             try
             {
                 WebRequest webRequest = WebRequest.Create(url);
-                responseStream = webRequest.GetResponse().GetResponseStream();
-                //if (File.Exists(destinationPath))
-                //{
-                //    File.Delete(destinationPath);
-                //}
-                //Stream output = File.OpenWrite(destinationPath);
                 byte[] result = null;
                 byte[] buffer = new byte[4096];
                 int bytesRead;
-                //while ((bytesRead = responseStream.Read(buffer, 0, buffer.Length)) > 0)
-                //{
-                //    output.Write(buffer, 0, bytesRead);
-                //}
-
-                //responseStream.Close();
-
-                memoryStream = new MemoryStream();
-
                 int count = 0;
 
-                do
+                using (Stream responseStream = webRequest.GetResponse().GetResponseStream())
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    count = responseStream.Read(buffer, 0, buffer.Length);
-                    memoryStream.Write(buffer, 0, count);
-
-                    if (count == 0)
+                    do
                     {
-                        break;
+                        count = responseStream.Read(buffer, 0, buffer.Length);
+                        memoryStream.Write(buffer, 0, count);
+
+                        if (count == 0)
+                        {
+                            break;
+                        }
                     }
+                    while (true);
+
+                    result = memoryStream.ToArray();
+
+                    using (FileStream fs = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        fs.Write(result, 0, result.Length);
                 }
-                while (true);
-
-                result = memoryStream.ToArray();
-
-                FileStream fs = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-
-                fs.Write(result, 0, result.Length);
-
-                fs.Close();
-                memoryStream.Close();
-                responseStream.Close();
             }
             catch (WebException wx)
             {
@@ -475,30 +419,27 @@ namespace PTSyncClient
             {
                 System.Diagnostics.Debug.WriteLine("Exception: " + wx.Message);
             }
-            finally
-            {
-                memoryStream.Close();
-                responseStream.Close();
-            }
         }
 
         public static void startUploadOHH(string url, Subscription package, bool backup)
         {
-            string _completeFilePathSource;
 
-
-            string[] filePaths = Directory.GetFiles(package.Source, package.FileName);
-            if (filePaths.Length > 0)
-                _completeFilePathSource = filePaths[0];
-            else
-            {
-                return;
-            }
-            string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(_completeFilePathSource)
-                                                        +"_"+DateTime.Now.ToString("yyyyMMddHHmmss") 
-                                                        + Path.GetExtension(_completeFilePathSource));
             try
             {
+                string _completeFilePathSource;
+
+
+                string[] filePaths = Directory.GetFiles(package.Source, package.FileName);
+                if (filePaths.Length > 0)
+                    _completeFilePathSource = filePaths[0];
+                else
+                {
+                    return;
+                }
+                string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(_completeFilePathSource)
+                                                            + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                            + Path.GetExtension(_completeFilePathSource));
+
                 List<String> fileBuffer = new List<String>();
                 using (StreamReader streamReader = new StreamReader(package.Source + "\\" + package.FileName, Encoding.Default))
                 {
@@ -521,8 +462,7 @@ namespace PTSyncClient
                 }
 
                 JObject jsonReponse = new JObject();
-                HttpWebResponse response = (HttpWebResponse)httpRequest.GetResponse();
-
+                using (HttpWebResponse response = (HttpWebResponse)httpRequest.GetResponse())
                 using (Stream responseStream = response.GetResponseStream())
                 {
                     using (StreamReader streamReader = new System.IO.StreamReader(responseStream))
@@ -531,12 +471,11 @@ namespace PTSyncClient
                         jsonReponse = JObject.Parse(rawJson);
                     }
                 }
-                response.Close();
 
-                string successResponse = jsonReponse["success"].ToString();
-                if (successResponse.Equals("true"))
+                string successResponse = (string)jsonReponse["Response"];
+                if (successResponse.Equals("success"))
                 {
-                    if (!System.IO.File.Exists(_completeFilePathStage) && backup)
+                    if (System.IO.File.Exists(_completeFilePathSource) && backup)
                     {
                         //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
                         System.IO.File.Move(_completeFilePathSource, _completeFilePathStage);
