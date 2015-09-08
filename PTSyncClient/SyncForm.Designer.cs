@@ -38,7 +38,6 @@
             this.ButtonUpdates = new System.Windows.Forms.Button();
             this.ButtonConfirmation = new System.Windows.Forms.Button();
             this.ButtonConnection = new System.Windows.Forms.Button();
-            this.SyncTimer = new System.Windows.Forms.Timer();
             this.ButtonDLSubs = new System.Windows.Forms.Button();
             this.ButtonDLMisc = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -111,10 +110,6 @@
             this.ButtonConnection.Text = "Connection";
             this.ButtonConnection.Click += new System.EventHandler(this.ButtonConnection_Click);
             // 
-            // SyncTimer
-            // 
-            this.SyncTimer.Tick += new System.EventHandler(this.SyncTimer_Tick);
-            // 
             // ButtonDLSubs
             // 
             this.ButtonDLSubs.Location = new System.Drawing.Point(0, 55);
@@ -157,7 +152,7 @@
             this.Controls.Add(this.ButtonSync);
             this.Menu = this.mainMenu1;
             this.Name = "SyncForm";
-            this.Text = "PTSync (v0.2.3)";
+            this.Text = "PTSync (v0.2.9)";
             this.Load += new System.EventHandler(this.SyncForm_Load);
             this.Activated += new System.EventHandler(this.SyncForm_Activated);
             this.ResumeLayout(false);
@@ -174,7 +169,6 @@
         private System.Windows.Forms.Button ButtonConnection;
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuItem2;
-        private System.Windows.Forms.Timer SyncTimer;
         private System.Windows.Forms.Button ButtonDLSubs;
         private System.Windows.Forms.Button ButtonDLMisc;
         private System.Windows.Forms.ListBox listBox1;

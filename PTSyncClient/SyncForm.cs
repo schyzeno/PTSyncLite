@@ -36,6 +36,7 @@ namespace PTSyncClient
         private void SyncForm_Load(object sender, EventArgs e)
         {
             //new SetUpController().firstTimeSetup();
+            XMLHandler.CreateMissingDirectories();
             syncController = new SyncController();
         }
 
@@ -45,8 +46,7 @@ namespace PTSyncClient
             syncController.loadSettings();
             syncController.loadUser();
         }
-
-
+        
         private void ButtonSync_Click(object sender, EventArgs e)
         {
             List<SyncOperation> operations = new List<SyncOperation>();
@@ -104,19 +104,6 @@ namespace PTSyncClient
         {
             ActionWithStatus(new SyncOperation(syncController.UploadMisc, "Uploading Misc...", DEFAULT_COMPLETE_STATEMENT));
         }        
-
-        private void SyncTimer_Tick(object sender, EventArgs e)
-        {
-            if (syncController.Settings.SyncInterval > MINIMUM_INTERVAL)
-                SyncTimer.Interval = syncController.Settings.SyncInterval;
-            else
-                SyncTimer.Interval = MINIMUM_INTERVAL;
-            syncController.IsSyncing = true;
-
-            syncController.IsSyncing = false;
-
-
-        }
 
         private void ButtonSubscription_Click(object sender, EventArgs e)
         {

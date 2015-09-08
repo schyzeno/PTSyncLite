@@ -26,6 +26,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0A1C2C97451243078D93B964CA17A17C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_42F6D842FFE30B39A52357A2B59CC4A8"
         "OwnerKey" = "8:_85A0816FE94D4BD497836DE5B2939EF0"
         "MsmSig" = "8:_UNDEFINED"
@@ -86,6 +92,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6DC04BF6B65340199F98E5C87C1860AA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7585409156F48CE919DF4D8A99135C9A"
         "OwnerKey" = "8:_85A0816FE94D4BD497836DE5B2939EF0"
         "MsmSig" = "8:_UNDEFINED"
@@ -135,6 +147,12 @@
         "Entry"
         {
         "MsmKey" = "8:_85A0816FE94D4BD497836DE5B2939EF0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A19A4A674EA0467A845A2DFA906A4348"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -342,6 +360,24 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_0A1C2C97451243078D93B964CA17A17C"
+            {
+            "SourcePath" = "8:..\\Config Files\\subscriptions.xml"
+            "TargetName" = "8:subscriptions.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_BFE0AE727901403CA60AD8F91A5541F2"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{E4F2F62A-3940-4BF5-A031-F7FA98CAAFFA}:_42F6D842FFE30B39A52357A2B59CC4A8"
             {
             "AssemblyIsInGAC" = "11:FALSE"
@@ -426,6 +462,24 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_6DC04BF6B65340199F98E5C87C1860AA"
+            {
+            "SourcePath" = "8:..\\Config Files\\config.xml"
+            "TargetName" = "8:config.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_BFE0AE727901403CA60AD8F91A5541F2"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{E4F2F62A-3940-4BF5-A031-F7FA98CAAFFA}:_7585409156F48CE919DF4D8A99135C9A"
             {
             "AssemblyIsInGAC" = "11:FALSE"
@@ -480,6 +534,24 @@
             "Register" = "3:0"
             "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_A19A4A674EA0467A845A2DFA906A4348"
+            {
+            "SourcePath" = "8:..\\Config Files\\settings.xml"
+            "TargetName" = "8:settings.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_BFE0AE727901403CA60AD8F91A5541F2"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{E4F2F62A-3940-4BF5-A031-F7FA98CAAFFA}:_B491DB78CEE1DE29CDCDD0D5D473F86F"

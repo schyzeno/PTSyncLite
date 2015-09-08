@@ -240,25 +240,25 @@ namespace PTSyncClient
                         loopCount++;
                     }
                     requestStream.Write(trailer, 0, trailer.Length);
-
-                    wresp = webRequest.GetResponse();
-                    Stream stream2 = wresp.GetResponseStream();
-                    StreamReader reader2 = new StreamReader(stream2);
-                    string response2 = reader2.ReadToEnd();
-                    JObject jsonReponse = JObject.Parse(response2);
-
-                    string successResponse = jsonReponse["success"].ToString();
-                    if (successResponse.Equals("true"))
-                    {
-                        if (System.IO.File.Exists(filePath) && backup)
-                        {
-                            //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
-                            System.IO.File.Move(filePath, _completeFilePathStage);
-                        }
-                        if (System.IO.File.Exists(filePath))
-                            System.IO.File.Delete(filePath);
-                    }
                 }
+                wresp = webRequest.GetResponse();
+                Stream stream2 = wresp.GetResponseStream();
+                StreamReader reader2 = new StreamReader(stream2);
+                string response2 = reader2.ReadToEnd();
+                JObject jsonReponse = JObject.Parse(response2);
+
+                string successResponse = jsonReponse["success"].ToString();
+                if (successResponse.Equals("true"))
+                {
+                    if (System.IO.File.Exists(filePath) && backup)
+                    {
+                        //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
+                        System.IO.File.Move(filePath, _completeFilePathStage);
+                    }
+                    if (System.IO.File.Exists(filePath))
+                        System.IO.File.Delete(filePath);
+                }
+
             }
             catch (Exception ex)
             {
@@ -332,34 +332,34 @@ namespace PTSyncClient
                     }
 
                     requestStream.Write(trailer, 0, trailer.Length);
-                    requestStream.Close();
 
-                    webResponse = webRequest.GetResponse();
-                    Stream responseStream = webResponse.GetResponseStream();
-                    StreamReader reader2 = new StreamReader(responseStream);
-                    string response2 = reader2.ReadToEnd();
-                    JObject jsonReponse = JObject.Parse(response2);
+                }
+                webResponse = webRequest.GetResponse();
+                Stream responseStream = webResponse.GetResponseStream();
+                StreamReader reader2 = new StreamReader(responseStream);
+                string response2 = reader2.ReadToEnd();
+                JObject jsonReponse = JObject.Parse(response2);
 
-                    string successResponse = jsonReponse["success"].ToString();
-                    if (successResponse.Equals("true"))
+                string successResponse = jsonReponse["success"].ToString();
+                if (successResponse.Equals("true"))
+                {
+                    string filePath = "";
+                    foreach (string fileName in fileNames)
                     {
-                        string filePath = "";
-                        foreach (string fileName in fileNames)
+                        filePath = Path.Combine(fileDir, fileName);
+                        string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(filePath)
+                                                    + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                    + Path.GetExtension(filePath));
+                        if (System.IO.File.Exists(filePath) && backup)
                         {
-                            filePath = Path.Combine(fileDir, fileName);
-                            string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(filePath)
-                                                        + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
-                                                        + Path.GetExtension(filePath));
-                            if (System.IO.File.Exists(filePath) && backup)
-                            {
-                                //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
-                                System.IO.File.Move(filePath, _completeFilePathStage);
-                            }
-                            if (System.IO.File.Exists(filePath))
-                                System.IO.File.Delete(filePath);
+                            //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
+                            System.IO.File.Move(filePath, _completeFilePathStage);
                         }
+                        if (System.IO.File.Exists(filePath))
+                            System.IO.File.Delete(filePath);
                     }
                 }
+
             }
             catch (Exception ex)
             {

@@ -240,7 +240,7 @@ namespace PTSync
                         loopCount++;
                     }
                     requestStream.Write(trailer, 0, trailer.Length);
-
+                }
                     wresp = webRequest.GetResponse();
                     Stream stream2 = wresp.GetResponseStream();
                     StreamReader reader2 = new StreamReader(stream2);
@@ -258,7 +258,7 @@ namespace PTSync
                         if (System.IO.File.Exists(filePath))
                             System.IO.File.Delete(filePath);
                     }
-                }
+                
             }
             catch (Exception ex)
             {
@@ -332,8 +332,8 @@ namespace PTSync
                     }
 
                     requestStream.Write(trailer, 0, trailer.Length);
-                    requestStream.Close();
-
+                    
+                }
                     webResponse = webRequest.GetResponse();
                     Stream responseStream = webResponse.GetResponseStream();
                     StreamReader reader2 = new StreamReader(responseStream);
@@ -359,7 +359,7 @@ namespace PTSync
                                 System.IO.File.Delete(filePath);
                         }
                     }
-                }
+                
             }
             catch (Exception ex)
             {

@@ -10,27 +10,65 @@ namespace PTSync
     {
         public static string SETTINGS_DIR = @"\PTSync";
         public static string TEMP_DIR = @"\PTSync\Temp";
+        public static string NO_USER_FOUND = "NO_USER_FOUND";
+        public static string DEFAULT_USER_PATH = @"\Program Files\PTSyncAll\config.xml";
+        public static string DEFAULT_SUBSCRIPTION_PATH = @"\Program Files\PTSyncAll\subscriptions.xml";
+        public static string DEFAULT_SETTINGS_PATH = @"\Program Files\PTSyncAll\settings.xml";
+
         public static string USER_PATH = @"\PTSync\config.xml";
         public static string SUBSCRIPTION_PATH = @"\PTSync\subscriptions.xml";
         public static string SETTINGS_PATH = @"\PTSync\settings.xml";
 
         public static List<T> Read<T>(string path)
         {
-            System.Xml.Serialization.XmlSerializer reader =
-                new System.Xml.Serialization.XmlSerializer(typeof(List<T>));
-            System.IO.StreamReader file = new System.IO.StreamReader(path);
-            List<T> list = (List<T>)reader.Deserialize(file);
-            file.Close();
+            List<T> list;
+            try
+            {
+                System.Xml.Serialization.XmlSerializer reader =
+                    new System.Xml.Serialization.XmlSerializer(typeof(List<T>));
+                System.IO.StreamReader file = new System.IO.StreamReader(path);
+                list = (List<T>)reader.Deserialize(file);
+                file.Close();
+            }
+            catch (System.IO.FileNotFoundException e)
+            {
+                list = new List<T>();
+            }
+            catch (Exception e)
+            {
+                list = new List<T>();
+            }
             return list;
         }
 
         public static void Write<T>(List<T> list, string path)
         {
-            System.Xml.Serialization.XmlSerializer writer =
-                new System.Xml.Serialization.XmlSerializer(typeof(List<T>));
-            System.IO.StreamWriter file = new System.IO.StreamWriter(path);
-            writer.Serialize(file, list);
-            file.Close();
+            try
+            {
+                System.Xml.Serialization.XmlSerializer writer =
+                    new System.Xml.Serialization.XmlSerializer(typeof(List<T>));
+                System.IO.StreamWriter file = new System.IO.StreamWriter(path);
+                writer.Serialize(file, list);
+                file.Close();
+            }
+            catch (System.IO.FileNotFoundException e)
+            {
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        public static void CreateMissingDirectories()
+        {
+            if (!System.IO.Directory.Exists(SETTINGS_DIR))
+                System.IO.Directory.CreateDirectory(SETTINGS_DIR);
+            if (!System.IO.File.Exists(USER_PATH))
+                System.IO.File.Copy(DEFAULT_USER_PATH, USER_PATH);
+            if (!System.IO.File.Exists(SETTINGS_PATH))
+                System.IO.File.Copy(DEFAULT_SETTINGS_PATH, SETTINGS_PATH);
+            if (!System.IO.File.Exists(SUBSCRIPTION_PATH))
+                System.IO.File.Copy(DEFAULT_SUBSCRIPTION_PATH, SUBSCRIPTION_PATH);
         }
 
         public static User GetUser()
@@ -39,7 +77,7 @@ namespace PTSync
             if (users.Count > 0)
                 return users[0];
             else
-                return new User();
+                return new User("", NO_USER_FOUND, "");
 
         }
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Settings>
+		<IP>192.0.0.1</IP>
+		<Port>8095</Port>
+		<SyncInterval>180000</SyncInterval>
+		<BackUpData>false</BackUpData>
+	</Settings>
+</ArrayOfSettings>
