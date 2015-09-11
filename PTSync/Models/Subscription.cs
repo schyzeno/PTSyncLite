@@ -13,6 +13,7 @@ namespace PTSync.Models
         public string FileName { get; set; }
         public string Stage { get; set; }
         public string Type { get; set; }
+        public string Cycle { get; set; }
     }
 }
 

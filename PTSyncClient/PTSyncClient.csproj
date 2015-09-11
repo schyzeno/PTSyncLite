@@ -67,6 +67,7 @@
     <Compile Include="ConnectionForm.designer.cs">
       <DependentUpon>ConnectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cycle.cs" />
     <Compile Include="Models\ServiceAddress.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\Subscription.cs" />

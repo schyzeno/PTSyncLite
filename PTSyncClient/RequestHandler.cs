@@ -186,6 +186,7 @@ namespace PTSyncClient
                     subscription.Name = jobj.Value<String>("Name");
                     subscription.Stage = jobj.Value<String>("Stage");
                     subscription.Type = jobj.Value<String>("Type");
+                    subscription.Cycle = jobj.Value<String>("Cycle");
                     subscriptions.Add(subscription);
                 }
                 XMLHandler.Write<Subscription>(subscriptions, XMLHandler.SUBSCRIPTION_PATH);

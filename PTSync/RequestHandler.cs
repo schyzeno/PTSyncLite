@@ -24,7 +24,7 @@ namespace PTSync
                 List<String> streamBuffer = new List<String>();
                 int numberOfFiles = 0;
 
-                using(Stream responseStream = wrGETURL.GetResponse().GetResponseStream())
+                using (Stream responseStream = wrGETURL.GetResponse().GetResponseStream())
                 using (StreamReader streamReader = new System.IO.StreamReader(responseStream))
                 {
                     if (!streamReader.EndOfStream)
@@ -99,8 +99,8 @@ namespace PTSync
             bool downloadSuccess = false;
             string _webServiceURI = url;
             string _destination = Path.Combine(package.Destination, package.FileName);
-            
-            
+
+
             try
             {
                 WebRequest wrGETURL = WebRequest.Create(_webServiceURI);
@@ -109,7 +109,7 @@ namespace PTSync
                 using (Stream responseStream = wrGETURL.GetResponse().GetResponseStream())
                 using (StreamReader streamReader = new System.IO.StreamReader(responseStream))
                 {
-                    
+
                     if (!streamReader.EndOfStream)
                     {
                         string firstLine = streamReader.ReadLine();
@@ -186,6 +186,7 @@ namespace PTSync
                     subscription.Name = jobj.Value<String>("Name");
                     subscription.Stage = jobj.Value<String>("Stage");
                     subscription.Type = jobj.Value<String>("Type");
+                    subscription.Cycle = jobj.Value<String>("Cycle");
                     subscriptions.Add(subscription);
                 }
                 XMLHandler.Write<Subscription>(subscriptions, XMLHandler.SUBSCRIPTION_PATH);
@@ -241,24 +242,24 @@ namespace PTSync
                     }
                     requestStream.Write(trailer, 0, trailer.Length);
                 }
-                    wresp = webRequest.GetResponse();
-                    Stream stream2 = wresp.GetResponseStream();
-                    StreamReader reader2 = new StreamReader(stream2);
-                    string response2 = reader2.ReadToEnd();
-                    JObject jsonReponse = JObject.Parse(response2);
+                wresp = webRequest.GetResponse();
+                Stream stream2 = wresp.GetResponseStream();
+                StreamReader reader2 = new StreamReader(stream2);
+                string response2 = reader2.ReadToEnd();
+                JObject jsonReponse = JObject.Parse(response2);
 
-                    string successResponse = jsonReponse["success"].ToString();
-                    if (successResponse.Equals("true"))
+                string successResponse = jsonReponse["success"].ToString();
+                if (successResponse.Equals("true"))
+                {
+                    if (System.IO.File.Exists(filePath) && backup)
                     {
-                        if (System.IO.File.Exists(filePath) && backup)
-                        {
-                            //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
-                            System.IO.File.Move(filePath, _completeFilePathStage);
-                        }
-                        if (System.IO.File.Exists(filePath))
-                            System.IO.File.Delete(filePath);
+                        //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
+                        System.IO.File.Move(filePath, _completeFilePathStage);
                     }
-                
+                    if (System.IO.File.Exists(filePath))
+                        System.IO.File.Delete(filePath);
+                }
+
             }
             catch (Exception ex)
             {
@@ -332,34 +333,34 @@ namespace PTSync
                     }
 
                     requestStream.Write(trailer, 0, trailer.Length);
-                    
-                }
-                    webResponse = webRequest.GetResponse();
-                    Stream responseStream = webResponse.GetResponseStream();
-                    StreamReader reader2 = new StreamReader(responseStream);
-                    string response2 = reader2.ReadToEnd();
-                    JObject jsonReponse = JObject.Parse(response2);
 
-                    string successResponse = jsonReponse["success"].ToString();
-                    if (successResponse.Equals("true"))
+                }
+                webResponse = webRequest.GetResponse();
+                Stream responseStream = webResponse.GetResponseStream();
+                StreamReader reader2 = new StreamReader(responseStream);
+                string response2 = reader2.ReadToEnd();
+                JObject jsonReponse = JObject.Parse(response2);
+
+                string successResponse = jsonReponse["success"].ToString();
+                if (successResponse.Equals("true"))
+                {
+                    string filePath = "";
+                    foreach (string fileName in fileNames)
                     {
-                        string filePath = "";
-                        foreach (string fileName in fileNames)
+                        filePath = Path.Combine(fileDir, fileName);
+                        string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(filePath)
+                                                    + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                    + Path.GetExtension(filePath));
+                        if (System.IO.File.Exists(filePath) && backup)
                         {
-                            filePath = Path.Combine(fileDir, fileName);
-                            string _completeFilePathStage = Path.Combine(BACKUP_DIR, Path.GetFileNameWithoutExtension(filePath)
-                                                        + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
-                                                        + Path.GetExtension(filePath));
-                            if (System.IO.File.Exists(filePath) && backup)
-                            {
-                                //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
-                                System.IO.File.Move(filePath, _completeFilePathStage);
-                            }
-                            if (System.IO.File.Exists(filePath))
-                                System.IO.File.Delete(filePath);
+                            //using (FileStream fs = System.IO.File.Create(_completeFilePathStage)) { }
+                            System.IO.File.Move(filePath, _completeFilePathStage);
                         }
+                        if (System.IO.File.Exists(filePath))
+                            System.IO.File.Delete(filePath);
                     }
-                
+                }
+
             }
             catch (Exception ex)
             {
@@ -387,7 +388,7 @@ namespace PTSync
                 byte[] buffer = new byte[4096];
                 int bytesRead;
                 int count = 0;
-                    
+
                 using (Stream responseStream = webRequest.GetResponse().GetResponseStream())
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
@@ -405,7 +406,7 @@ namespace PTSync
 
                     result = memoryStream.ToArray();
 
-                    using(FileStream fs = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    using (FileStream fs = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                         fs.Write(result, 0, result.Length);
                 }
             }
@@ -423,7 +424,7 @@ namespace PTSync
 
         public static void startUploadOHH(string url, Subscription package, bool backup)
         {
-            
+
             try
             {
                 string _completeFilePathSource;
@@ -462,7 +463,7 @@ namespace PTSync
                 }
 
                 JObject jsonReponse = new JObject();
-                using(HttpWebResponse response = (HttpWebResponse)httpRequest.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)httpRequest.GetResponse())
                 using (Stream responseStream = response.GetResponseStream())
                 {
                     using (StreamReader streamReader = new System.IO.StreamReader(responseStream))

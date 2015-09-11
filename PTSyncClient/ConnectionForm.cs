@@ -27,6 +27,7 @@ namespace PTSyncClient
             TextBoxIP.Text = syncController.Settings.IP;
             TextBoxPort.Text = syncController.Settings.Port;
             TextBoxInteval.Text = syncController.Settings.SyncInterval.ToString();
+            TextBoxDaily.Text = syncController.Settings.DailySyncTime.ToString();
             CheckBoxBackUp.Checked = syncController.Settings.BackupData;
 
         }
@@ -39,12 +40,15 @@ namespace PTSyncClient
             users.Add(new User(TextBoxCompanyID.Text,TextBoxName.Text,TextBoxPassword.Text));
             try
             {
-                
-                settings.Add(new Settings(TextBoxIP.Text, TextBoxPort.Text, Int32.Parse(TextBoxInteval.Text), CheckBoxBackUp.Checked));
+
+                settings.Add(new Settings(TextBoxIP.Text, TextBoxPort.Text, 
+                                        Int32.Parse(TextBoxInteval.Text), 
+                                        CheckBoxBackUp.Checked, 
+                                        Int32.Parse(TextBoxDaily.Text)));
             }
             catch (Exception ex)
             {
-                settings.Add(new Settings(TextBoxIP.Text, TextBoxPort.Text, 180000, false));
+                settings.Add(new Settings(TextBoxIP.Text, TextBoxPort.Text, 3, false,400));
             }
 
             XMLHandler.SaveSettings(settings);

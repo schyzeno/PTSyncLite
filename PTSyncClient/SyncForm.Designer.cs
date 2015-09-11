@@ -158,7 +158,7 @@
             this.Controls.Add(this.ButtonSync);
             this.Menu = this.mainMenu1;
             this.Name = "SyncForm";
-            this.Text = "PTSync (v0.2.9)";
+            this.Text = "PTSync (v0.3.1)";
             this.Load += new System.EventHandler(this.SyncForm_Load);
             this.Activated += new System.EventHandler(this.SyncForm_Activated);
             this.ResumeLayout(false);

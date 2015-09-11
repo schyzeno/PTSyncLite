@@ -3,8 +3,8 @@
 	<Settings>
 		<IP>192.0.0.1</IP>
 		<Port>8095</Port>
-		<SyncInterval>180000</SyncInterval>
-		<DailySyncTime>4</DailySyncTime>
+		<SyncInterval>15</SyncInterval>
+		<DailySyncTime>0400</DailySyncTime>
 		<BackUpData>false</BackUpData>
 	</Settings>
 </ArrayOfSettings>

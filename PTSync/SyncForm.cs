@@ -23,19 +23,24 @@ namespace PTSync
         {
             syncController = new SyncController();
 
+            SyncAll(Models.Cycle.Any);
+            Application.Exit();
+        }
+        private void SyncAll(string cycle)
+        {
+            //SyncAll(Cycle.Interval);
             syncController.DownloadSubscriptions();
             syncController.loadSubscriptions();
-            syncController.UploadOHH();
-            syncController.DownloadUpdates();
-            syncController.DownloadConfirmations();
-            syncController.DeleteFiles();
-            syncController.DeleteStartsWith();
-            syncController.RenameFiles();
-            syncController.Download();
-            syncController.UploadMisc();
-            syncController.UploadStartsWith();
-            Application.Exit();
-        }       
+            syncController.UploadOHH(cycle);
+            syncController.DownloadUpdates(cycle);
+            syncController.DownloadConfirmations(cycle);
+            syncController.DeleteFiles(cycle);
+            syncController.DeleteStartsWith(cycle);
+            syncController.RenameFiles(cycle);
+            syncController.Download(cycle);
+            syncController.UploadMisc(cycle);
+            syncController.UploadStartsWith(cycle);
+        }
 
 
     }

@@ -47,7 +47,7 @@ namespace PTSyncClient
             syncController.loadSettings();
             syncController.loadUser();
             CycleTimer.Enabled = true;
-            CycleTimer.Interval = syncController.Settings.SyncInterval;
+            CycleTimer.Interval = syncController.Settings.SyncInterval*1000*60;
         }
         
         private void ButtonSync_Click(object sender, EventArgs e)

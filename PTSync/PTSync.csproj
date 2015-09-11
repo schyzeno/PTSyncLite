@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="AsyncRequestHandler.cs" />
     <Compile Include="FileHandler.cs" />
+    <Compile Include="Models\Cycle.cs" />
     <Compile Include="Models\ServiceAddress.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="SyncController.cs" />

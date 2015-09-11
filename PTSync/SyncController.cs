@@ -10,7 +10,6 @@ namespace PTSync
 {
     public class SyncController
     {
-        public Boolean IsSyncing { get; set; }
         public User User { get; set; }
         public Settings Settings { get; set; }
         public List<Subscription> Subscriptions { get; set; }
@@ -23,7 +22,6 @@ namespace PTSync
             Subscriptions = new List<Subscription>();
             loadSubscriptions();
             loadSettings();
-            IsSyncing = false;
         }
 
         public void loadUser()
@@ -40,12 +38,21 @@ namespace PTSync
             }
         }
 
+        public bool isDailySync()
+        {
+            Int32 currentTime = Convert.ToInt32(DateTime.Now.ToString("HHmm"));
+            //Int32 dailyFloor = Settings.DailySyncTime - Settings.SyncInterval;
+            //Int32 dailyCeil = Settings.DailySyncTime + Settings.SyncInterval;
+            return currentTime >= (Settings.DailySyncTime - Settings.SyncInterval)
+                    && currentTime <= (Settings.DailySyncTime + Settings.SyncInterval);
+        }
+
         public void loadSettings()
         {
             Settings = XMLHandler.GetSettings();
         }
 
-        public void DownloadUpdates()
+        public void DownloadUpdates(string cycle)
         {
             if (File.Exists(waitFilePath))
             {
@@ -57,7 +64,7 @@ namespace PTSync
             //Loop through subs for HHDownload set, download
             foreach (Subscription subscription in Subscriptions)
             {
-                if (subscription.Type.Equals("DownloadSet"))
+                if (subscription.Type.Equals("DownloadSet") && HasCurrentCycle(subscription.Cycle, cycle))
                 {
                     if (File.Exists(Path.Combine(subscription.Destination, subscription.FileName)))
                         File.Delete(Path.Combine(subscription.Destination, subscription.FileName));
@@ -70,22 +77,22 @@ namespace PTSync
 
         }
 
-        public void UploadOHH()
+        public void UploadOHH(string cycle)
         {
             foreach (Subscription subscription in Subscriptions)
             {
-                if (subscription.Type.Equals("Upload"))
+                if (subscription.Type.Equals("Upload") && HasCurrentCycle(subscription.Cycle, cycle))
                 {
                     RequestHandler.startUploadOHH(ServiceAddress.GetUploadURL(Settings, User, subscription), subscription, Settings.BackupData);
                 }
             }
         }
 
-        public void DownloadConfirmations()
+        public void DownloadConfirmations(string cycle)
         {
             foreach (Subscription subscription in Subscriptions)
             {
-                if (subscription.Type.Equals("DownloadStartsWith"))
+                if (subscription.Type.Equals("DownloadStartsWith") && HasCurrentCycle(subscription.Cycle, cycle))
                 {
                     RequestHandler.StartDownloadStartsWithRequest(ServiceAddress.GetDownloadConfirmationURL(Settings, User, subscription), subscription);
                 }
@@ -97,16 +104,16 @@ namespace PTSync
             RequestHandler.DownloadSubscriptions(ServiceAddress.GetSubscriptionURL(Settings, User));
         }
 
-        public void ConfirmDownloads()
+        public void ConfirmDownloads(string cycle)
         {
 
         }
 
-        public void DeleteFiles()
+        public void DeleteFiles(string cycle)
         {
             foreach (Subscription subscription in Subscriptions)
             {
-                if (subscription.Type.Equals("Delete"))
+                if (subscription.Type.Equals("Delete") && HasCurrentCycle(subscription.Cycle, cycle))
                 {
                     string sourcePath = Path.Combine(subscription.Source, subscription.FileName);
                     if (File.Exists(sourcePath))
@@ -115,11 +122,11 @@ namespace PTSync
             }
         }
 
-        public void RenameFiles()
+        public void RenameFiles(string cycle)
         {
             foreach (Subscription subscription in Subscriptions)
             {
-                if (subscription.Type.Equals("Rename"))
+                if (subscription.Type.Equals("Rename") && HasCurrentCycle(subscription.Cycle, cycle))
                 {
                     string sourcePath = Path.Combine(subscription.Source, subscription.FileName);
                     string destinationPath = Path.Combine(subscription.Destination, subscription.Stage);
@@ -133,11 +140,11 @@ namespace PTSync
             }
         }
 
-        public void UploadMisc()
+        public void UploadMisc(string cycle)
         {
             foreach (Subscription subscription in Subscriptions)
             {
-                if (subscription.Type.Equals("UploadMisc"))
+                if (subscription.Type.Equals("UploadMisc") && HasCurrentCycle(subscription.Cycle, cycle))
                 {
                     string url = ServiceAddress.GetUploadMiscURL(Settings, User, subscription);
                     string path = Path.Combine(subscription.Source, subscription.FileName);
@@ -157,12 +164,13 @@ namespace PTSync
             }
         }
 
-        public void UploadStartsWith()
+        public void UploadStartsWith(string cycle)
         {
-            try{
+            try
+            {
                 foreach (Subscription subscription in Subscriptions)
                 {
-                    if (subscription.Type.Equals("UploadStartsWith"))
+                    if (subscription.Type.Equals("UploadStartsWith") && HasCurrentCycle(subscription.Cycle, cycle))
                     {
                         //Find all files that
                         string fileNameRegEx = subscription.FileName + "*";
@@ -192,11 +200,11 @@ namespace PTSync
             }
         }
 
-        public void Download()
+        public void Download(string cycle)
         {
             foreach (Subscription subscription in Subscriptions)
             {
-                if (subscription.Type.Equals("Download"))
+                if (subscription.Type.Equals("Download") && HasCurrentCycle(subscription.Cycle, cycle))
                 {
                     if (!File.Exists(Path.Combine(subscription.Destination, subscription.FileName)))
                     {
@@ -207,13 +215,13 @@ namespace PTSync
             }
         }
 
-        public void DeleteStartsWith()
+        public void DeleteStartsWith(string cycle)
         {
             try
             {
                 foreach (Subscription subscription in Subscriptions)
                 {
-                    if (subscription.Type.Equals("DeleteStartsWith"))
+                    if (subscription.Type.Equals("DeleteStartsWith") && HasCurrentCycle(subscription.Cycle, cycle))
                     {
                         string fileNameRegEx = subscription.FileName + "*";
                         foreach (string filePath in Directory.GetFiles(subscription.Source, fileNameRegEx))
@@ -232,6 +240,14 @@ namespace PTSync
             {
                 System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message);
             }
+        }
+
+        private bool HasCurrentCycle(string subscriptionCycle, string currentCycle)
+        {
+            if (currentCycle.Equals(Cycle.Any))
+                return true;
+            else
+                return subscriptionCycle.Equals(currentCycle);
         }
 
     }
