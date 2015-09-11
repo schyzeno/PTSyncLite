@@ -41,6 +41,7 @@
             this.ButtonDLSubs = new System.Windows.Forms.Button();
             this.ButtonDLMisc = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.CycleTimer = new System.Windows.Forms.Timer();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -135,6 +136,11 @@
             this.listBox1.Size = new System.Drawing.Size(100, 184);
             this.listBox1.TabIndex = 11;
             // 
+            // CycleTimer
+            // 
+            this.CycleTimer.Interval = 300000;
+            this.CycleTimer.Tick += new System.EventHandler(this.CycleTimer_Tick);
+            // 
             // SyncForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -172,6 +178,7 @@
         private System.Windows.Forms.Button ButtonDLSubs;
         private System.Windows.Forms.Button ButtonDLMisc;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Timer CycleTimer;
     }
 }
 
