@@ -73,12 +73,6 @@ namespace PTSync
                                 for (int j = 0; j < streamBuffer.Count; j++)
                                     sw.WriteLine(streamBuffer[j]);
                             }
-                            _backup = package.Stage + "\\" + fileName;
-                            using (StreamWriter sw = new StreamWriter(_backup, false))
-                            {
-                                for (int k = 0; k < streamBuffer.Count; k++)
-                                    sw.WriteLine(streamBuffer[k]);
-                            }
                         }
                     }
 

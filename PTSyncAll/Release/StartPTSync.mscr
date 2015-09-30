@@ -1,0 +1,3 @@
+Run( "\Program Files\PTSyncAll\PTSyncClient.exe")
+WaitForActive( "PTSync", 5000)
+Minimize( "PTSync")
