@@ -1,0 +1,120 @@
+k=ActiveProcess()
+x = ActiveWindow()
+message (k & " " & x)
+kill ("\Program Files\AppForge Projects\Pro_Track_Handheld.exe")
+k = FileExists("\Application\Pro_Track_Handheld.exe")
+l = FileExists("\Application\PTSyncClient.exe")
+M = FileExists("\Application\PTSync.exe")
+if(k = 1) 
+if (K+L+M <> 0) 
+message (K+L+M & " Update Found!")
+n = "Pro_Track /" & "^NL^"
+endif
+if (l = 1)
+n = n & "PTSyncClient /" & "^NL^"
+endif
+
+if (M = 1)
+n = n & ""PTSync /"
+endif
+message ("Update List " & "^NL^" & 
+
+if (K+L+M <> 0) 
+message (K+L+M & " Update Found!")
+endif
+
+j = 1
+#j =1 update were already availble, no need to recheck q r s"
+else
+j = 0
+message ("No Update found!" & "^NL^" & "Handheld Syncing....")
+O = FileExists("\Program Files\AppForge Projects\Pro_Track_Handheld.exe")
+if (O = 1)
+Runwait ( "\Program Files\AppForge Projects\Pro_Track_Handheld.exe" )
+message ("Rechecking")
+endif
+endif 
+#message (j)
+if (j = 0)
+q = FileExists("\Application\Pro_Track_Handheld.exe")
+r = FileExists("\Application\PTSyncClient.exe")
+s = FileExists("\Application\PTSync.exe")
+message ("qrs" & q+r+s)
+if (q+r+s = 0) 
+message ("No Update Received!" & "^NL^" & "Kindly Contact Support")
+exit
+else
+message ("Update List" & "^NL^" & "Pro_Track /" & q & "^NL^" & "PTSyncClient /" & r & "^NL^" & "PTSync /" & s)
+
+endif
+endif
+
+
+
+
+p = WndExists( "PTSync")
+If (p = 1)
+message ("Closing PT Sync")
+Close( "PTSync")
+else 
+
+endif
+
+m = WndExists( "Main Menu")
+If (m = 1)
+message ("Closing Main Menu")
+Close( "Main Menu")
+endif
+
+
+
+kill ("Pro_Track_Handheld.exe")
+Copy( "\Program Files\AppForge Projects\Pro_Track_Handheld.exe","\HHBackup\Pro_Track_Handheld.exe",TRUE)
+Copy( "\Program Files\PTSyncAll\PTSyncClient.exe","\HHBackup\PTSyncClient.exe",TRUE)
+Copy( "\Program Files\PTSyncAll\PTSync.exe","\HHBackup\PTSync.exe",TRUE)
+
+
+d = FileExists("\Application\Pro_Track_Handheld.exe")
+if (d=1)
+Delete( "\Program Files\AppForge Projects\Pro_Track_Handheld.exe")
+endif
+
+
+
+e = FileExists("\Application\PTSyncClient.exe")
+if (e=1)
+Delete( "\Program Files\PTSyncAll\PTSyncClient.exe")
+endif
+
+f = FileExists("\Application\PTSync.exe")
+if (f=1)
+Delete( "\Program Files\PTSyncAll\PTSync.exe")
+endif
+
+
+b = FileExists("\Application\Pro_Track_Handheld.exe")
+if (b = 1) 
+message (b & " Pro_Track_Handheld.exe File Exists")
+Copy( "\Application\Pro_Track_Handheld.exe","\Program Files\AppForge Projects\Pro_Track_Handheld.exe",TRUE)
+endif
+
+q = FileExists("\Application\PTSyncClient.exe")
+if (q=1)
+Copy( "\Application\PTSyncClient.exe","\PTSync\PTSyncClient.exe",TRUE)
+endif
+
+v = FileExists("\Application\PTSync.exe")
+if (v=1)
+Copy( "\Application\PTSync.exe","\PTSync\PTSync.exe",TRUE)
+endif
+
+
+message ("Starting Protrack")
+Run( "\Program Files\PTSyncAll\PTSyncClient.exe")
+Run( "\Program Files\AppForge Projects\Pro_Track_Handheld.exe")
+
+m = WndExists("Main Menu")
+If (m = 1)
+message ("Closing Main Menu")
+Show("Main Menu")
+endif

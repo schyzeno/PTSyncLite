@@ -46,10 +46,10 @@ namespace PTSync.Models
         }
 
 
-        public static string GetConfirmationReceiptURL(Settings settings, User user, Subscription subscription, string fileName)
+        public static string GetConfirmationReceiptURL(Settings settings, User user)
         {
-            string route = "/HHUpload/Confirm";
-            return BaseURL(settings) + route + FSLASH + user.CompanyID + FSLASH + user.Name + FSLASH + subscription.Name + FSLASH + fileName;
+            string route = "/HHDownload/Confirm";
+            return BaseURL(settings) + route + FSLASH + user.CompanyID + FSLASH + user.Name;
         }
 
         public static string GetDownloadConfirmationURL(Settings settings, User user, Subscription subscription)

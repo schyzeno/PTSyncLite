@@ -1,0 +1,8 @@
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncUpdater\bin\Release\PTSyncUpdater.exe
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncUpdater\bin\Release\PTSyncUpdater.pdb
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncUpdater\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncUpdater\obj\Release\PTSyncUpdater.UpdateForm.resources
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncUpdater\obj\Release\PTSyncUpdater.Properties.Resources.resources
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncUpdater\obj\Release\PTSyncUpdater.csproj.GenerateResource.Cache
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncUpdater\obj\Release\PTSyncUpdater.exe
+C:\Users\Purvi\Documents\Visual Studio 2008\Projects\PTSyncLite\PTSync\PTSyncUpdater\obj\Release\PTSyncUpdater.pdb

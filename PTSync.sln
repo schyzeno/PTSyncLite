@@ -7,6 +7,8 @@ Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "PTSyncAll", "PTSyncAll\PTSy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTSyncClient", "PTSyncClient\PTSyncClient.csproj", "{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTSyncUpdater", "PTSyncUpdater\PTSyncUpdater.csproj", "{F485496B-14B4-4AD5-9343-1422EF0CDECB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,12 @@ Global
 		{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AEA85CC2-1B13-4F3E-A34D-4AA8D014E730}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F485496B-14B4-4AD5-9343-1422EF0CDECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F485496B-14B4-4AD5-9343-1422EF0CDECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F485496B-14B4-4AD5-9343-1422EF0CDECB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F485496B-14B4-4AD5-9343-1422EF0CDECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F485496B-14B4-4AD5-9343-1422EF0CDECB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F485496B-14B4-4AD5-9343-1422EF0CDECB}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

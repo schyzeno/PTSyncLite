@@ -69,6 +69,7 @@ namespace PTSyncClient
             operations.Add(new SyncOperation(new Action(delegate() { syncController.Download(cycle); }), "Downloading Misc...", DEFAULT_COMPLETE_STATEMENT));
             operations.Add(new SyncOperation(new Action(delegate() { syncController.UploadMisc(cycle); }), "Uploading Misc...", DEFAULT_COMPLETE_STATEMENT));
             operations.Add(new SyncOperation(new Action(delegate() { syncController.UploadStartsWith(cycle); }), "Uploading Startswith...", DEFAULT_COMPLETE_STATEMENT));
+            operations.Add(new SyncOperation(new Action(delegate() { syncController.ConfirmDownloads(cycle); }), "Verifying Downloads...", DEFAULT_COMPLETE_STATEMENT));
             ActionWithStatus(operations);
             RefreshSubscriptionList();
         }
@@ -185,6 +186,7 @@ namespace PTSyncClient
             syncController.Download(cycle);
             syncController.UploadMisc(cycle);
             syncController.UploadStartsWith(cycle);
+            syncController.ConfirmDownloads(cycle);
         }
 
     }

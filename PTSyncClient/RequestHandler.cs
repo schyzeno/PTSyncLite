@@ -416,6 +416,53 @@ namespace PTSyncClient
             }
         }
 
+        public static void sendFileconfirmations(string url, List<Subscription> packages)
+        {
+
+            try
+            {
+                HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+                httpRequest.Method = "POST";
+                httpRequest.KeepAlive = false;
+                httpRequest.Timeout = 30000;
+                httpRequest.ContentType = "text/json";
+
+                using (var writer = new StreamWriter(httpRequest.GetRequestStream(), Encoding.UTF8))
+                {
+                    JArray filesConfirmed = new JArray(packages);
+                    writer.Write(filesConfirmed);
+                    writer.Flush();
+                    writer.Close();
+                }
+
+                JObject jsonReponse = new JObject();
+                using (HttpWebResponse response = (HttpWebResponse)httpRequest.GetResponse())
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    using (StreamReader streamReader = new System.IO.StreamReader(responseStream))
+                    {
+                        var rawJson = streamReader.ReadToEnd();
+                        jsonReponse = JObject.Parse(rawJson);
+                    }
+                }
+
+                string successResponse = (string)jsonReponse["Response"];
+                if (successResponse.Equals("success"))
+                {
+                    
+                }
+            }
+            catch (WebException wx)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + wx.Message);
+            }
+            catch (Exception wx)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + wx.Message);
+            }
+        }
+    
+
         public static void startUploadOHH(string url, Subscription package, bool backup)
         {
 

@@ -21,6 +21,12 @@
         "Entry"
         {
         "MsmKey" = "8:_04AC2C97E6492491EAE7D99124F12AB1"
+        "OwnerKey" = "8:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_04AC2C97E6492491EAE7D99124F12AB1"
         "OwnerKey" = "8:_A8C5CE12B7484FE98B2DEF9A981962C7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -32,8 +38,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3617BD76E4AD4FFBABB66A310DF5B41F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_42F6D842FFE30B39A52357A2B59CC4A8"
         "OwnerKey" = "8:_85A0816FE94D4BD497836DE5B2939EF0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_42F6D842FFE30B39A52357A2B59CC4A8"
+        "OwnerKey" = "8:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -50,8 +68,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_512C6367311442349A5C95C0CA5DBED5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_51D6ECB5627821471E943088F4175330"
         "OwnerKey" = "8:_85A0816FE94D4BD497836DE5B2939EF0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_51D6ECB5627821471E943088F4175330"
+        "OwnerKey" = "8:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -105,6 +135,12 @@
         "Entry"
         {
         "MsmKey" = "8:_7585409156F48CE919DF4D8A99135C9A"
+        "OwnerKey" = "8:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7585409156F48CE919DF4D8A99135C9A"
         "OwnerKey" = "8:_A8C5CE12B7484FE98B2DEF9A981962C7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -118,6 +154,12 @@
         {
         "MsmKey" = "8:_804B5256D0A0706DCE71EF8971320CBD"
         "OwnerKey" = "8:_ECECBB78622D931A13B39CCE3A426EE0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_804B5256D0A0706DCE71EF8971320CBD"
+        "OwnerKey" = "8:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -152,6 +194,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A8C5CE12B7484FE98B2DEF9A981962C7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -160,6 +208,12 @@
         {
         "MsmKey" = "8:_B491DB78CEE1DE29CDCDD0D5D473F86F"
         "OwnerKey" = "8:_85A0816FE94D4BD497836DE5B2939EF0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B491DB78CEE1DE29CDCDD0D5D473F86F"
+        "OwnerKey" = "8:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -231,6 +285,12 @@
         "Entry"
         {
         "MsmKey" = "8:_CF41F8577B39BE450B8FD2BE87A853BE"
+        "OwnerKey" = "8:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CF41F8577B39BE450B8FD2BE87A853BE"
         "OwnerKey" = "8:_A8C5CE12B7484FE98B2DEF9A981962C7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -260,6 +320,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D19EA712F81B401C83D1510A83E70DF3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D5725628546E4D49B26C7CA38056ED90"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EA6BFA83DA804B42871CE2976A3D65CB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -268,6 +340,12 @@
         {
         "MsmKey" = "8:_ECECBB78622D931A13B39CCE3A426EE0"
         "OwnerKey" = "8:_04AC2C97E6492491EAE7D99124F12AB1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ECECBB78622D931A13B39CCE3A426EE0"
+        "OwnerKey" = "8:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -292,6 +370,12 @@
         {
         "MsmKey" = "8:_F7A628C1D8CE800F82E7BFD122C75A64"
         "OwnerKey" = "8:_85A0816FE94D4BD497836DE5B2939EF0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F7A628C1D8CE800F82E7BFD122C75A64"
+        "OwnerKey" = "8:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -378,6 +462,24 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_3617BD76E4AD4FFBABB66A310DF5B41F"
+            {
+            "SourcePath" = "8:..\\Config Files\\UpdateProTrack.mscr"
+            "TargetName" = "8:UpdateProTrack.mscr"
+            "Tag" = "8:"
+            "Folder" = "8:_BFE0AE727901403CA60AD8F91A5541F2"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{E4F2F62A-3940-4BF5-A031-F7FA98CAAFFA}:_42F6D842FFE30B39A52357A2B59CC4A8"
             {
             "AssemblyIsInGAC" = "11:FALSE"
@@ -404,6 +506,24 @@
             "Register" = "3:0"
             "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_512C6367311442349A5C95C0CA5DBED5"
+            {
+            "SourcePath" = "8:..\\Config Files\\MortScript.exe"
+            "TargetName" = "8:MortScript.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_BFE0AE727901403CA60AD8F91A5541F2"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{E4F2F62A-3940-4BF5-A031-F7FA98CAAFFA}:_51D6ECB5627821471E943088F4175330"
@@ -592,6 +712,42 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_D19EA712F81B401C83D1510A83E70DF3"
+            {
+            "SourcePath" = "8:..\\Config Files\\mortzip.dll"
+            "TargetName" = "8:mortzip.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_BFE0AE727901403CA60AD8F91A5541F2"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_D5725628546E4D49B26C7CA38056ED90"
+            {
+            "SourcePath" = "8:..\\Config Files\\UpdateProTrack.exe"
+            "TargetName" = "8:UpdateProTrack.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_BFE0AE727901403CA60AD8F91A5541F2"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{BA458234-9B71-4F46-8107-E91156377184}:_EA6BFA83DA804B42871CE2976A3D65CB"
             {
             "SourcePath" = "8:..\\Config Files\\settings.xml"
@@ -723,6 +879,32 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{D5ED24EE-CC6F-449F-9830-31D1A7F68011}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_A31A4FF7FE0A4C85AFAFEF751494D8B4"
+            {
+            "SourcePath" = "8:..\\PTSyncUpdater\\obj\\Release\\PTSyncUpdater.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_BFE0AE727901403CA60AD8F91A5541F2"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:0"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{F485496B-14B4-4AD5-9343-1422EF0CDECB}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

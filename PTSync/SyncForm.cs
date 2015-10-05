@@ -40,6 +40,7 @@ namespace PTSync
             syncController.Download(cycle);
             syncController.UploadMisc(cycle);
             syncController.UploadStartsWith(cycle);
+            syncController.ConfirmDownloads(cycle);
         }
 
 

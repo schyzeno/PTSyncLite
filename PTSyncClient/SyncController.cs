@@ -106,7 +106,37 @@ namespace PTSyncClient
 
         public void ConfirmDownloads(string cycle)
         {
+            string serviceAddress = ServiceAddress.GetConfirmationReceiptURL(Settings, User);
+            List<Subscription> confirmedDownloads = new List<Subscription>();
+            foreach (Subscription subscription in Subscriptions)
+            {
+                if (subscription.Type.Equals("Download") && HasCurrentCycle(subscription.Cycle, cycle))
+                {
+                    string sourcePath = Path.Combine(subscription.Destination, subscription.FileName);
+                    if (File.Exists(sourcePath))
+                        confirmedDownloads.Add(subscription);
+                }
+                else if (subscription.Type.Equals("DownloadSet") && HasCurrentCycle(subscription.Cycle, cycle))
+                {
+                    string sourcePath = Path.Combine(subscription.Destination, subscription.FileName);
+                    if (File.Exists(sourcePath))
+                        confirmedDownloads.Add(subscription);
+                }
+                else if (subscription.Type.Equals("DownloadStartsWith") && HasCurrentCycle(subscription.Cycle, cycle))
+                {
+                    string fileNameRegEx = subscription.FileName + "*.txt";
 
+                    string[] completeFilePaths = Directory.GetFiles(subscription.Destination, fileNameRegEx);
+
+                    foreach (string completeFilePath in completeFilePaths)
+                    {
+                        Subscription tempSub = subscription;
+                        tempSub.FileName = Path.GetFileName(completeFilePath);
+                        confirmedDownloads.Add(tempSub);
+                    }
+                }
+            }
+            RequestHandler.sendFileconfirmations(serviceAddress, confirmedDownloads);
         }
 
         public void DeleteFiles(string cycle)
