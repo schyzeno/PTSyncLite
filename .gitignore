@@ -41,3 +41,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.exe
+Release/CabWiz.log
+Release/PTSyncAll.inf
+Release/StartPTSync - Copy.mscr
+Release/StartPTSync.mscr
